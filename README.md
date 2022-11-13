@@ -63,7 +63,7 @@ Examples:
 1. Open a workbook and print the list of worksheets:
 ```
 	~$ python3 ccell.py -f app_study.xlsm -l
-    0 Tree
+	0 Tree
 	1 Signals
 	2 Installation as built
 	3 Additional Info
