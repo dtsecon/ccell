@@ -24,7 +24,7 @@ REQUIREMENTS
 ------------
 **ccell** runs with **python 3.x** and requires the following python libraries in order run:  
 
- * **openpyxl**, a Python library to read/write Excel 2010 xlsx/xlsm/xltx/xltm files
+ * **openpyxl**, a Python library to read/write Excel 2010 xlsx / xlsm / xltx / xltm files
    (https://openpyxl.readthedocs.io/en/stable/)
 
 
