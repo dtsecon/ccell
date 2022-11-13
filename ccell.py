@@ -31,8 +31,8 @@ from openpyxl import Workbook, load_workbook
 # print a sheet range in table format
 def printRange(range):
 
-    # find max length for each column of range
-    maxlen = [1] * len(range[0])
+    # find max length for each column of range (initial length 4)
+    maxlen = [4] * len(range[0])
     for r in range:
         for i, v in enumerate(r):
             if len(str(v.value)) > maxlen[i]:
@@ -237,7 +237,7 @@ def main():
         sys.exit(0)
 
     # save to a different file if write has been defined and exit with success
-    if save and write:
+    if save and (write or strip):
         print("Saving to file %s" % (save))
         wb.save(save)
         sys.exit(0)
