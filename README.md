@@ -11,7 +11,7 @@ CONTENTS OF THIS FILE
 INTRODUCTION
 ------------
 
-**ccell** is a generic tool for read and write cells from workbooks (spreadsheets). **ccell** stands for (**c**)hange **cell**. It supports **ods**, **xlsx**, **xlsm**, and **xls** file formats  
+**ccell** is a generic tool for read and write cells from workbooks (spreadsheets). **ccell** stands for (**c**)hange **cell**. It supports **ods**, **xlsx**, **xlsm** and **xls** file formats    
  
  * For the description of modio tool visit   
    https://github.com/dtsecon/ccell
