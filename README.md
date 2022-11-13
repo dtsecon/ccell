@@ -22,7 +22,7 @@ INTRODUCTION
 
 REQUIREMENTS
 ------------
-**ccell** runs with **python 3.x** and requires the following python libraries in order run:  
+**ccell** runs with **python 3.x** and requires the following python libraries:  
 
  * **openpyxl**, a Python library to read/write Excel 2010 xlsx / xlsm / xltx / xltm files
    (https://openpyxl.readthedocs.io/en/stable/)
@@ -31,10 +31,10 @@ REQUIREMENTS
 INSTALLATION
 ------------
 
- 1. **openpyxl**. You can install openpyxl as python package by running...
+ 1. **openpyxl**. You can install openpyxl as a python package by running...
 
-    * `pip3 install openpyxl` or   
-    * `sudo pip3 install openpyxl`  
+    * `pip3 install openpyxl` to install openpyxl to user $HOME or   
+    * `sudo pip3 install openpyxl` to install it to system directory 
 
  2. **ccell**. Install and run ccell:
     * `git clone https://github.com/dtsecon/ccell` - download the source
