@@ -97,7 +97,7 @@ Examples:
 ```
 5. Change the value of a cell range in a worksheet and save changes to file
 ```
-	~$ python3 ccell.py -ftest3.xlsm -i 1 -cA4:C6 -w 100
+	~$ python3 ccell.py -ftest3.xlsm -i 1 -c A4:C6 -w 100
 
   	0|  1.0| -1.0| None| 
   	1|  1.0| -1.0| None| 
@@ -110,7 +110,7 @@ Examples:
 ```
 6. Remove leading and trailing white spaces from a cell range and save workbook in a diffrent file   
 ```
-	~$ python3 ccell.py -f app_study.xlsm -i 1 -cD1:D5 -p -s temp.xlsm
+	~$ python3 ccell.py -f app_study.xlsm -i 1 -c D1:D5 -p -s temp.xlsm
 
   	0|   I/O Type| 
   	1|       SITE| 
@@ -127,7 +127,7 @@ Examples:
 ```
 7. Change a cell range without saving to file (dry run) 
 ```
-	~$ python3 ccell.py -f app_study.xlsm -i 1 -cA1:E5 -w 100 -r
+	~$ python3 ccell.py -f app_study.xlsm -i 1 -c A1:E5 -w 100 -r
 
   	0| Controller Index| Position|                         Module Model| I/O Type| Module Positions (+,-)| 
   	1|             -1.0|     None| cc7a6dd7-0712-4aac-a52f-2c404bfe6f8c|     SITE|                    0.0| 
