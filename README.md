@@ -51,6 +51,7 @@ Usage: ccell.py [OPTIONS]...
 --shee(t)      <sheet name> the sheet name in the workbook
 --(i)ndex     <sheet index> the sheet index in the workbook
 --(c)ell          <address> the cell or range of cells using column-row notation e.g. A12 or A2:E12
+                            if cell not provided, entire sheet is active range
 --(w)rite           <value> write a new value in cell or cell range
 --stri(p)                   strip text value from leading and trailing spaces
 --(s)ave         <filename> save workbook as a different file
