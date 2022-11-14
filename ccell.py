@@ -25,8 +25,10 @@
 
 import getopt
 import sys
+import os
 
 from openpyxl import Workbook, load_workbook
+
 
 # print a sheet range in table format
 def printRange(range):
@@ -59,6 +61,7 @@ def usage():
     print("--shee(t)      <sheet name> the sheet name in the workbook")
     print("--(i)ndex     <sheet index> the sheet index in the workbook")
     print("--(c)ell          <address> the cell or range of cells using column-row notation e.g. A12 or A2:E12")
+    print("                            if cell not provided, entire sheet is active range")
     print("--(w)rite           <value> write a new value in cell or cell range")
     print("--stri(p)                   strip text value from leading and trailing spaces")
     print("--(s)ave         <filename> save workbook as a different file")
@@ -76,12 +79,12 @@ def main():
         # print help information and exit:
         print(err)
         usage()
-        sys.exit(2)
+        sys.exit(os.EX_USAGE)
 
     # if no options passed, print usage and exit
     if not opts:
         usage()
-        sys.exit(2) 
+        sys.exit(os.EX_USAGE) 
 
     # initialize states
     file = None
@@ -111,7 +114,7 @@ def main():
                 index = int(a)
             except ValueError as err:
                 print("Error: option -i <index> (%s)" % (err))
-                sys.exit(2)
+                sys.exit(os.EX_USAGE)
         elif o in ("-c", "--cell"):
             cell = a
         elif o in ("-w", "--write"):
@@ -145,7 +148,7 @@ def main():
         for a in args:
             print("Unrecognized argument", a)
         usage()
-        sys.exit(2)
+        sys.exit(os.EX_USAGE)
         
 
     # check if a filename has been defined
@@ -154,35 +157,48 @@ def main():
     else:
         print("Filename is missing (use -f <filename>)")
         usage()
-        sys.exit(2)
+        sys.exit(os.EX_USAGE)
 
     # check if list option has been given
     if listSheets:    
         for s in wb.worksheets:
             print(wb.index(s), s.title)
-        sys.exit(2)
+        sys.exit(os.EX_USAGE)
 
     # check if sheet name or index has been defined
     if sheet:
-        ws = wb[sheet]
+        try:
+            ws = wb[sheet]
+        except KeyError as err:
+            print("Error: option -t <sheet name> (%s)" % (err))
+            sys.exit(os.EX_USAGE)
     elif index != None:
-        ws = wb.worksheets[index]
+        try:
+            ws = wb.worksheets[index]
+        except IndexError as err:
+            print("Error: option -i <sheet index> (%s)" % (err))
+            sys.exit(os.EX_USAGE)
     else:
-        print("Sheet name or index is missing (use -s <name> or -i <index>)")
+        print("Sheet name or index is missing (use -s <sheet name> or -i <sheet index>)")
         usage()
-        sys.exit(2)
+        sys.exit(os.EX_USAGE)
         
-    # check if a cell address has been defined
+    # check if a cell address has been defined and get the range
     if cell:
         try:
             c = ws[cell]
         except ValueError as err:
             print("Error: option -c <address> (%s)" % (err))
-            sys.exit(2)
+            sys.exit(os.EX_USAGE)
+    # otherwise get the whole sheet
     else:
-        print("Cell address is missing (use -c <address>)")
-        usage()
-        sys.exit(2)
+        c = ws["A1:" + 
+               ws.cell(row=ws.max_row, column=ws.max_column).column_letter + 
+               str(ws.cell(row=ws.max_row, column=ws.max_column).row)
+            ]
+        #print("Cell address is missing (use -c <address>)")
+        #usage()
+        #sys.exit(os.EX_USAGE)
         
     # print value of cell
     if type(c) in [list, tuple]:
@@ -206,7 +222,7 @@ def main():
                             v.value = float(write)
                         except ValueError as err:
                             print("Error: option -w <value> (%s)" % (err))
-                            sys.exit(2)
+                            sys.exit(os.EX_USAGE)
             printRange(c)
         elif c.data_type == 's':
             c.value = write
@@ -216,7 +232,7 @@ def main():
                 c.value = float(write)
             except ValueError as err:
                 print("Error: option -w <value> (%s)" % (err))
-                sys.exit(2)
+                sys.exit(os.EX_USAGE)
             print("cell %s!%s new value: %s type: %s" % (ws.title, cell, c.value, c.data_type))
 
     # Strip a cell with text value from leading and trailing spaces
@@ -234,13 +250,13 @@ def main():
 
     # if a dry run exit with success
     if dry:
-        sys.exit(0)
+        sys.exit(os.EX_OK)
 
     # save to a different file if write has been defined and exit with success
     if save and (write or strip):
         print("Saving to file %s" % (save))
         wb.save(save)
-        sys.exit(0)
+        sys.exit(os.EX_OK)
 
     # save to file if write has been defined
     if write or strip:
@@ -248,7 +264,7 @@ def main():
         wb.save(file)
 
     # exit with success
-    sys.exit(0)
+    sys.exit(os.EX_OK)
 
 if __name__ == "__main__":
     main()
