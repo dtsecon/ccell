@@ -31,7 +31,7 @@ try:
     from openpyxl import Workbook, load_workbook
 except ModuleNotFoundError as err:
     print("Error: install module openpyxl (%s)" % (err))
-    sys.exit(os.EX_NOTFOUND)
+    sys.exit(os.EX_UNAVAILABLE)
 
 # print a sheet range in table format
 def printRange(range):
