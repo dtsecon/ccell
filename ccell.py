@@ -153,7 +153,11 @@ def main():
 
     # check if a filename has been defined
     if file:
-        wb = load_workbook(file);
+        try:
+            wb = load_workbook(file);
+        except ModuleNotFoundError as err:
+            print("Error: install module openpyxl (%s)" % (err))
+            sys.exit(os.EX_NOTFOUND)
     else:
         print("Filename is missing (use -f <filename>)")
         usage()
