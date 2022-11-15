@@ -27,8 +27,11 @@ import getopt
 import sys
 import os
 
-from openpyxl import Workbook, load_workbook
-
+try:
+    from openpyxl import Workbook, load_workbook
+except ModuleNotFoundError as err:
+    print("Error: install module openpyxl (%s)" % (err))
+    sys.exit(os.EX_NOTFOUND)
 
 # print a sheet range in table format
 def printRange(range):
@@ -153,11 +156,7 @@ def main():
 
     # check if a filename has been defined
     if file:
-        try:
-            wb = load_workbook(file);
-        except ModuleNotFoundError as err:
-            print("Error: install module openpyxl (%s)" % (err))
-            sys.exit(os.EX_NOTFOUND)
+        wb = load_workbook(file)
     else:
         print("Filename is missing (use -f <filename>)")
         usage()
