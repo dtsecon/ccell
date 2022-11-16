@@ -67,6 +67,7 @@ def usage():
     print("                            if cell not provided, entire sheet is active range")
     print("--(w)rite           <value> write a new value in cell or cell range")
     print("--stri(p)                   strip text value from leading and trailing spaces")
+    print("--r(e)place     <value/new> replace a cell value with a new")
     print("--(s)ave         <filename> save workbook as a different file")
     print("--d(r)y                     run without saving to file")
     print("--(l)ist_sheets             list the available sheets in workbook")
@@ -74,8 +75,8 @@ def usage():
 def main():
     try:
         opts, args = getopt.getopt(sys.argv[1:], 
-                                   "hf:t:i:c:w:ps:rlvd", 
-                                   ["help", "file=", "sheet=", "index=", "cell=", "write=", "strip", "save=", "dry", "list_sheets", "verbose", "debug"]
+                                   "hf:t:i:c:w:pe:s:rlvd", 
+                                   ["help", "file=", "sheet=", "index=", "cell=", "write=", "strip", "replace", "save=", "dry", "list_sheets", "verbose", "debug"]
                     )
     except getopt.GetoptError as err:
 
@@ -96,6 +97,7 @@ def main():
     cell = None
     write = None
     strip = False
+    replace = None
     save = None
     dry = None
     listSheets = False
@@ -124,6 +126,8 @@ def main():
             write = a
         elif o in ("-p", "--strip"):
             strip = True
+        elif o in ("-e", "--replace"):
+            replace = a
         elif o in ("-s", "--save"):
             save = a
         elif o in ("-r", "--dry"):
@@ -250,19 +254,76 @@ def main():
             c.value = c.value.strip()
             print("cell %s!%s value: %s type: %s length: %s" % (ws.title, cell, c.value, c.data_type, len(c.value)))
         
+    # Replace a cell value with a new
+    if replace:
+        token = replace.split("/")
+        if len(token) != 2:
+            print("Error: missing separator (option -e <value/new>)")
+            sys.exit(os.EX_NOTFOUND)
+        if type(c) in [list, tuple]:
+            cnt = 0
+            for r in c:
+                for v in r:
+                    if v.data_type == 's':
+                        if v.value == token[0]:
+                            v.value = token[1]
+                            cnt += 1
+                    if v.data_type == 'n':
+                        if v.value == None:
+                            continue
+                        try:
+                            if float(v.value) == float(token[0]):
+                                cnt += 1
+                                try:
+                                    v.value = float(token[1])
+                                except ValueError as err:
+                                    print("Error: option -e <value/new> (%s)" % (err))
+                                    continue
+                        except ValueError:
+                            continue
+            printRange(c)            
+            if cnt == 0:
+                print("No matches")
+                sys.exit(os.EX_OK)
+            else:
+                print("%d matches found" % (cnt))
+        elif c.data_type == 's':
+            if c.value == token[0]:
+                c.value = token[1]
+                print("cell %s!%s value: %s type: %s length: %s" % (ws.title, cell, c.value, c.data_type, len(c.value)))
+            else:
+                print("No match")
+                sys.exit(os.EX_OK)
+        elif c.data_type == 'n':   
+            if c.value == None:
+                print("No match")
+                sys.exit(os.EX_OK)
+            try:
+                if float(c.value) == float(token[0]):
+                    try:
+                        c.value = float(token[1])
+                    except ValueError as err:
+                        print("Error: option -e <value/new> (%s)" % (err))
+                        sys.exit(os.EX_USAGE)
+                    print("cell %s!%s new value: %s type: %s" % (ws.title, cell, c.value, c.data_type))
+            except ValueError as err:
+                print("Error: option -e <value/new> (%s)" % (err))
+                sys.exit(os.EX_USAGE)
+                
+
 
     # if a dry run exit with success
     if dry:
         sys.exit(os.EX_OK)
 
     # save to a different file if write has been defined and exit with success
-    if save and (write or strip):
+    if save and (write or strip or replace):
         print("Saving to file %s" % (save))
         wb.save(save)
         sys.exit(os.EX_OK)
 
     # save to file if write has been defined
-    if write or strip:
+    if write or strip or replace:
         print("Saving to file %s" % (file))
         wb.save(file)
 
