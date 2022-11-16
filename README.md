@@ -148,28 +148,28 @@ Examples:
 ```
 	~$ python3 ccell.py -f test3.xlsm -i 1 -c A1:F10 -e 1.0/5.0 -r
 
-  0| Controller Index| Position|                         Module Model| I/O Type| Module Positions (+,-)|        Bus Αddress| 
-  1|             -1.0|     None| cc7a6dd7-0712-4aac-a52f-2c404bfe6f8c|     SITE|                    0.0|               None| 
-  2|              1.0|      0.0|                            RSC10-110|      CPU|                    0.0|     172.28.192.160| 
-  3|              1.0|     -1.0|                                 None|     ROOM|                   None|                1.0| 
-  4|              1.0|     -1.0|                                 None|     ROOM|                   None|                2.0| 
-  5|              1.0|     -1.0|                                 None|     ROOM|                   None|                3.0| 
-  6|              1.0|      0.0|                            RSC10-110| ETHERNET|                   None| 172.28.192.161:502| 
-  7|              1.0|      1.0|                            RSC10-210|      AI1|                    1,2|                0:0| 
-  8|              1.0|      1.0|                            RSC10-210|      AI2|                    3,4|                0:1| 
-  9|              1.0|      1.0|                            RSC10-210|      AI3|                    5,6|                0:2| 
+  	0| Controller Index| Position|                         Module Model| I/O Type| Module Positions (+,-)|        Bus Αddress| 
+  	1|             -1.0|     None| cc7a6dd7-0712-4aac-a52f-2c404bfe6f8c|     SITE|                    0.0|               None| 
+  	2|              1.0|      0.0|                            RSC10-110|      CPU|                    0.0|     172.28.192.160| 
+  	3|              1.0|     -1.0|                                 None|     ROOM|                   None|                1.0| 
+  	4|              1.0|     -1.0|                                 None|     ROOM|                   None|                2.0| 
+  	5|              1.0|     -1.0|                                 None|     ROOM|                   None|                3.0| 
+  	6|              1.0|      0.0|                            RSC10-110| ETHERNET|                   None| 172.28.192.161:502| 
+  	7|              1.0|      1.0|                            RSC10-210|      AI1|                    1,2|                0:0| 
+  	8|              1.0|      1.0|                            RSC10-210|      AI2|                    3,4|                0:1| 
+  	9|              1.0|      1.0|                            RSC10-210|      AI3|                    5,6|                0:2| 
 
-  0| Controller Index| Position|                         Module Model| I/O Type| Module Positions (+,-)|        Bus Αddress| 
-  1|             -1.0|     None| cc7a6dd7-0712-4aac-a52f-2c404bfe6f8c|     SITE|                    0.0|               None| 
-  2|              5.0|      0.0|                            RSC10-110|      CPU|                    0.0|     172.28.192.160| 
-  3|              5.0|     -1.0|                                 None|     ROOM|                   None|                5.0| 
-  4|              5.0|     -1.0|                                 None|     ROOM|                   None|                2.0| 
-  5|              5.0|     -1.0|                                 None|     ROOM|                   None|                3.0| 
-  6|              5.0|      0.0|                            RSC10-110| ETHERNET|                   None| 172.28.192.161:502| 
-  7|              5.0|      5.0|                            RSC10-210|      AI1|                    1,2|                0:0| 
-  8|              5.0|      5.0|                            RSC10-210|      AI2|                    3,4|                0:1| 
-  9|              5.0|      5.0|                            RSC10-210|      AI3|                    5,6|                0:2| 
-12 matches found
+  	0| Controller Index| Position|                         Module Model| I/O Type| Module Positions (+,-)|        Bus Αddress| 
+  	1|             -1.0|     None| cc7a6dd7-0712-4aac-a52f-2c404bfe6f8c|     SITE|                    0.0|               None| 
+  	2|              5.0|      0.0|                            RSC10-110|      CPU|                    0.0|     172.28.192.160| 
+  	3|              5.0|     -1.0|                                 None|     ROOM|                   None|                5.0| 
+  	4|              5.0|     -1.0|                                 None|     ROOM|                   None|                2.0| 
+  	5|              5.0|     -1.0|                                 None|     ROOM|                   None|                3.0| 
+  	6|              5.0|      0.0|                            RSC10-110| ETHERNET|                   None| 172.28.192.161:502| 
+  	7|              5.0|      5.0|                            RSC10-210|      AI1|                    1,2|                0:0| 
+  	8|              5.0|      5.0|                            RSC10-210|      AI2|                    3,4|                0:1| 
+  	9|              5.0|      5.0|                            RSC10-210|      AI3|                    5,6|                0:2| 
+	12 matches found
 
 ```
 
